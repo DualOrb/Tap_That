@@ -62,6 +62,13 @@ if (isset($_SESSION["user"])) {
                 mysqli_stmt_bind_param($stmt,"ssss",$first_name, $last_name, $email, $passwordHash);
                 mysqli_stmt_execute($stmt);
                 echo "<div class='alert alert-success'>You are registered successfully.</div>";
+
+                //Mail me some registration details - will re-enable on deploy
+//                mail(
+//                "nicholas.rose57@gmail.com",
+//            "New user registerred!",
+//            "The user ". $first_name . " " . $last_name . " at " . $email . " has registered",
+//                );
             }else{
                 die("Something went wrong");
             }

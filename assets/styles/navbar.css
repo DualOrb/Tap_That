@@ -1,7 +1,20 @@
+
 .navbar-brand {
     padding-left: 10px;
 }
 
 .nav-item {
     padding-left: 30px;
+}
+
+.navbar {
+    border-bottom: yellowgreen;
+    border-bottom-style: solid;
+    border-width: 7px;
+}
+.logo {
+    color: white;
+    font-weight: bold;
+    font-style: italic;
+    font-size: x-large;
 }
