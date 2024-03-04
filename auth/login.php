@@ -14,8 +14,13 @@ if (isset($_SESSION["user"])) {
     <title>Login Form</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/styles/style.css">
+    <link rel="stylesheet" href="../assets/styles/navbar.css">
+
 </head>
 <body>
+<?php
+require_once("../partials/navbar.php")
+?>
 <div class="container">
     <?php
     if (isset($_POST["login"])) {
@@ -50,7 +55,7 @@ if (isset($_SESSION["user"])) {
             <input type="submit" value="Login" name="login" class="btn btn-primary">
         </div>
     </form>
-    <div><p>Not registered yet <a href="registration.php">Register Here</a></p></div>
+    <div><p>Not registered yet? <a href="registration.php">Register Here</a></p></div>
 </div>
 </body>
 </html>
