@@ -8,7 +8,7 @@ body {
     flex-direction: column;
 }
 
-.main {
+#main {
     border-color: black;
     border-style: solid;
     flex-grow: 1;
@@ -17,19 +17,31 @@ body {
     flex-direction: row;
 }
 
-.mapbox {
-    width: 70%;
+#mapbox {
+    width: 50%;
 
 }
 
-.pins {
-    width: 15%;
+#pins {
+    width: 25%;
 
 }
 
-.work-area {
-    width: 15%;
+#work-area {
+    width: 25%;
 
 }
+
+#map {
+    height: 100%;
+}
+
+@media only screen and (max-width: 490px)
+{
+    #mapbox {
+        width: 100%;
+    }
+}
+
 
 

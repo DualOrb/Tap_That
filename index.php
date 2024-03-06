@@ -17,14 +17,17 @@ if (!isset($_SESSION["user"])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/styles/navbar.css">
     <link rel="stylesheet" href="assets/styles/index.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script type="module" src="assets/js/index.js"></script>
+
     <title>User Dashboard</title>
 </head>
 <body style="padding: 0px;">
 <?php
 require_once("partials/navbar.php")
 ?>
-<div class="main">
-    <div class="pins scroll">
+<div id="main">
+    <div id="pins">
         <ul>
             <li><h3>Groups</h3></li>
             <li><h4>Demo-Group-1</h4></li>
@@ -32,10 +35,17 @@ require_once("partials/navbar.php")
         </ul>
 
     </div>
-    <div class="mapbox">
-        <h1>Map goes here</h1>
+    <div id="mapbox">
+        <div id="map"></div>
+        <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
+            ({key: "", v: "weekly"});</script>
     </div>
-    <div class="work-area">
+
+
+
+
+
+    <div id="work-area">
         <h1>Work goes here</h1>
     </div>
 </div>
