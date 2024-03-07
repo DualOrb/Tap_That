@@ -1,3 +1,5 @@
+
+
 // Load the Google map
 let map;
 
@@ -83,3 +85,35 @@ function handleLocationError(browserHasGeolocation, infoWindow, map) {
 }
 
 initMap();
+
+
+// Controls related to creating new map elements
+$(document).ready( function() {
+    document.getElementById("create-new-pin-button").addEventListener("click", createNewPin, false);
+});
+function createNewPin(){
+
+    let data = {
+        "pin_type": $("#select-pin-type").val(),
+        "pin_name": $("#pin-name").val(),
+        "pin_lat": $("#pin-lat").val(),
+        "pin_lon": $("#pin-lon").val(),
+        "pin_altitude": $("#pin-alt").val(),
+        "color": $("#pin-color").val(),
+        "info": {
+            "pin_desc": $("#pin-desc").val(),
+            "tree_health": $("#select-tree-health").val(),
+            "num_taps": $("#num_taps").val()
+        }
+    }
+
+    $.ajax({
+        url: "php/pins/add-pin.php",
+        type: "POST",
+        data: data,
+        success: function(data){
+            alert(data);
+        }
+    });
+
+}

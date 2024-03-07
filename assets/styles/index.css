@@ -24,7 +24,7 @@ body {
 
 #pins {
     width: 25%;
-
+    background-color: #E0E0E0;
 }
 
 #work-area {
@@ -34,6 +34,7 @@ body {
 
 #map {
     height: 100%;
+    text-decoration: none;
 }
 
 @media only screen and (max-width: 490px)
@@ -43,5 +44,10 @@ body {
     }
 }
 
+/*Form Elements related to the pin box*/
+#work-area {
+    padding: 20px;
+    background-color: #E0E0E0;
+}
 
 

@@ -10,3 +10,24 @@ addEventListener("resize", (event) => {
     }
 
 })
+
+$(document).ready( function() {
+    populatePins();
+});
+
+function populatePins() {
+    console.log("getting");
+
+    let pinData;
+    $.ajax({
+        url: "php/pins/get-all-pins.php",
+        type: "GET",
+        data: {}
+    }).done(function(data) {
+          pinData = data;
+          console.log(data);
+    })
+
+    console.log(pinData);
+
+}
