@@ -19,6 +19,7 @@ if (!isset($_SESSION["user"])) {
     <link rel="stylesheet" href="assets/styles/index.css">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script type="module" src="assets/js/index.js"></script>
+    <script type="module" src="assets/js/maps.js"></script>
 
     <title>User Dashboard</title>
 </head>

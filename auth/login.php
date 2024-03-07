@@ -33,7 +33,7 @@ require_once("../partials/navbar.php")
         if ($user) {
             if (password_verify($password, $user["password"])) {
                 session_start();
-                $_SESSION["user"] = "yes";
+                $_SESSION["user"] = base64_encode($email);
                 header("Location: ../index.php");
                 die();
             }else{
