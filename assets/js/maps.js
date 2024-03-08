@@ -71,7 +71,7 @@ async function initMap() {
 
     // Do not await, since we want a "lazy loop"
     updateCurrentLocation(map)
-
+    return map;
 }
 
 function handleLocationError(browserHasGeolocation, infoWindow, map) {
@@ -84,9 +84,48 @@ function handleLocationError(browserHasGeolocation, infoWindow, map) {
     infoWindow.open(map);
 }
 
-initMap();
+// Adds all the pins on the page to the map, based on its data
+async function addPagePinsToMap(map) {
+    const { Map } = await google.maps.importLibrary("maps");
+    const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
+
+    $.ajax({
+        url: "php/pins/getAllUserPins.php",
+        type: "GET",
+        data: {},
+        success: function(data){
+
+        }
+    }).done(function(data) {
+        console.log(JSON.parse(data).data.length)
+        for(let i = 0; i < (JSON.parse(data).data.length); i++) {
+            let pin_data = JSON.parse(data).data[i];
+            const pinBackground = new PinElement({
+                background: "#FBBC04"
+            })
+            console.log(pin_data);
+            const pos = {
+                lat: pin_data.pos_x,
+                lng: pin_data.pos_y
+            }
+            console.log(pos)
+            let marker = new AdvancedMarkerElement ({
+                position: pos,
+                map,
+                content: pinBackground.element,
+            });
+
+        }
+
+    })
+
+}
 
 
+
+let mp = await initMap();
+
+await addPagePinsToMap(mp);
 // Controls related to creating new map elements
 $(document).ready( function() {
     document.getElementById("create-new-pin-button").addEventListener("click", createNewPin, false);

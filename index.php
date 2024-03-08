@@ -29,11 +29,12 @@ require_once("partials/navbar.php")
 ?>
 <div id="main">
     <div id="pins">
-        <ul>
-            <li><h3>Groups</h3></li>
-            <li><h4>Demo-Group-1</h4></li>
-            <li><p>Pin1</p></li>
-        </ul>
+<!--        Populate pins in collapseable cards here-->
+        <div id="accordion">
+            <?php
+                require_once("php/pins/get-all-pins.php");
+            ?>
+        </div>
 
     </div>
     <div id="mapbox">
