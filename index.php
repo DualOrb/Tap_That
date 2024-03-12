@@ -41,10 +41,10 @@ require_once("partials/navbar.php")
     <div id="mapbox">
         <div id="map"></div>
         <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
-            ({key: "AIzaSyBgLSLWN3kl-h-1GEMafnb9zFgv_vUr5Ys", v: "weekly"});</script>
+            ({key: "", v: "weekly"});</script>
     </div>
 
-    <div id="work-area">
+    <div id="work-area" class="scroll">
         <div class="form-heading">
             <h1>Create map element</h1>
             <label for="select-element-type">Select Element Type</label>
@@ -78,9 +78,12 @@ require_once("partials/navbar.php")
                     <input id="pin-lat" class="form-control" type="text" name="pox_x" placeholder="Latitude">
                     <input id="pin-lon" class="form-control" type="text" name="pos_y" placeholder="Longitude">
                     <input id="pin-alt" class="form-control" type="text" name="pos_altitude" placeholder="Altitude(m)">
+                    <button type="button" class="btn btn-secondary form-control" id="locate-button">Locate</button>
+
                 </div>
+
                 <div class="form-group form-row">
-                    <label for="select-element-type">Tree Health</label>
+                    <label for="select-element-type" id="tree-health-label">Tree Health</label>
                     <select class="form-control" id="select-tree-health">
                         <option value="healthy">Healthy</option>
                         <option value="medium">Average</option>
@@ -88,22 +91,23 @@ require_once("partials/navbar.php")
                     </select>
                 </div>
                 <div class="form-group form-row">
-                    <label for="num_taps">Number of Taps</label>
-                    <input class="form-control" type="range" name="num_taps" id="num_taps" min="0" max="5" value="1" step="1" placeholder="Latitude" oninput="this.nextElementSibling.value = this.value">
-                    <output>1</output>
+                    <label for="num_taps" id="num-taps-label">Number of Taps</label>
+                    <input class="form-control" type="range" name="num_taps" id="num-taps" min="0" max="5" value="1" step="1" placeholder="Latitude" oninput="this.nextElementSibling.value = this.value">
+                    <output id="num-taps-range-output">1</output>
                 </div>
 
                 <hr>
                 <div class="form-group form-row">
                     <textarea id="pin-desc" class="form-control" name="desc" placeholder="Description of the pin" cols="50" rows="3" res></textarea>
                 </div>
+                <button type="button" id="create-new-pin-button" class="btn btn-primary">Create</button>
 
             </div>
 
 
         </form>
 
-        <button id="create-new-pin-button" class="btn btn-primary">Create</button>
+
 
 
     </div>

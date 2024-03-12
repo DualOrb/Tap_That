@@ -11,68 +11,78 @@ addEventListener("resize", (event) => {
 
 })
 
-$(document).ready( function() {
-    // populatePins();
-});
-
-// function populatePins() {
-//     console.log("getting");
-//
-//     let pinData;
-//     $.ajax({
-//         url: "php/pins/get-all-pins.php",
-//         type: "GET",
-//         data: {}
-//     }).done(function (data) {
-//         pinData = data;
-//         console.log(data);
-//     })
 
 
-//     < div
-//
-//     class
-//
-//     = "card" >
-//         < div
-//
-//     class
-//
-//     = "card-header"
-//     id = "headingOne" >
-//         < h5
-//
-//     class
-//
-//     = "mb-0" >
-//         < button
-//
-//     class
-//
-//     = "btn btn-link"
-//     data - toggle = "collapse"
-//     data - target = "#collapseOne"
-//     aria - expanded = "true"
-//     aria - controls = "collapseOne" >
-//         Collapsible
-//     Group
-//     Item
-// #
-//     1
-//     < /button>
-// </h5>
-// </div>
-//
-//     <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-//         <div className="card-body">
-//             Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
-//             officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3
-//             wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
-//             Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan
-//             excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt
-//             you probably haven't heard of them accusamus labore sustainable VHS.
-//         </div>
-//     </div>
-// </div>
+function onPinChange() {
+    let selected = document.getElementById("select-pin-type").value;
+    let color_selector = document.getElementById("pin-color")
 
-//}
+    // Unhide hidden elements
+    togglePinTypeElements(true);
+
+    // On true, shows all elements required for a tap type input.
+    // False, hides non-required elements
+    function togglePinTypeElements(toggle) {
+        if(toggle) {
+            $("#select-tree-health").show();
+            $("#tree-health-label").show();
+            document.getElementById("select-tree-health").value = "healthy"
+
+            document.getElementById("num-taps").value = 1
+            $("#num-taps").show();
+            $("#num-taps-label").show();
+            $("#num-taps-range-output").show();
+        } else {
+            // Tree Health
+            document.getElementById("select-tree-health").value = ""
+            $("#select-tree-health").hide();
+            $("#tree-health-label").hide();
+            $("#num-taps-range-output").hide();
+
+            // Num Taps
+            document.getElementById("num-taps").value = null
+            $("#num-taps").hide();
+            $("#num-taps-label").hide();
+        }
+    }
+
+    // Change the color selected
+    switch(selected) {
+        case "shack":
+            color_selector.value = "#298022";
+            togglePinTypeElements(false)
+            break;
+        case "post":
+            color_selector.value = "#631a1a";
+            togglePinTypeElements(false)
+            break;
+        case "tap":
+            color_selector.value = "#FFC300";
+            break;
+        case "collection":
+            color_selector.value = "#308fc2";
+            togglePinTypeElements(false)
+            break;
+        case undefined:
+            color_selector.value = "#ff0008";
+            togglePinTypeElements(false)
+            break;
+    }
+}
+
+function updatePositionCoordinates() {
+    if(!navigator.geolocation) { return }
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+            document.getElementById("pin-lat").value = position.coords.latitude
+            document.getElementById("pin-lon").value = position.coords.longitude
+            document.getElementById("pin-alt").value = position.coords.altitude
+        }
+    )
+}
+
+$(document).ready(function (event) {
+    document.getElementById("select-pin-type").addEventListener("change", onPinChange, false)
+    document.getElementById("locate-button").addEventListener("click", updatePositionCoordinates, false)
+
+})
