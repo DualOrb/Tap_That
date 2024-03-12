@@ -50,15 +50,30 @@ async function initMap() {
                         lat: position.coords.latitude,
                         lng: position.coords.longitude,
                     };
-                    const pinBackground = new PinElement({
-                        background: "#FBBC04"
-                    })
+
+                    const glyphImg = document.createElement("img");
+                    glyphImg.className = "current-location";
+
+                    glyphImg.src =
+                        "assets/icons/person-walking-solid.svg";
+
+                    const glyphSvgPinElement = new PinElement({
+                        glyph: glyphImg,
+                        scale: 1.5,
+                        background: "#2862de",
+                        borderColor: "#2862de",
+                    });
+
+
                     if(isFirst) {
+                        let content = buildMarkerContent("person_walking",null,pos,map)
                         marker = new AdvancedMarkerElement ({
                             position: pos,
                             map,
-                            content: pinBackground.element,
+                            content: glyphSvgPinElement.element,
+                            title: "Current Location"
                         });
+
                         isFirst = false
                     } else {
                         marker.position = pos
@@ -97,18 +112,18 @@ async function addPagePinsToMap(map) {
 
         }
     }).done(function(data) {
-        console.log(JSON.parse(data).data.length)
         for(let i = 0; i < (JSON.parse(data).data.length); i++) {
             let pin_data = JSON.parse(data).data[i];
             const pinBackground = new PinElement({
-                background: "#FBBC04"
+                background: "#FBBC04",
+                borderColor: "#FBBC04"
             })
-            console.log(pin_data);
+
             const pos = {
                 lat: pin_data.pos_x,
                 lng: pin_data.pos_y
             }
-            console.log(pos)
+
             let marker = new AdvancedMarkerElement ({
                 position: pos,
                 map,
@@ -155,4 +170,52 @@ function createNewPin(){
         }
     });
 
+}
+
+async function buildMarkerContent(icon_string, pin_data, pos, map) {
+    const { Map } = await google.maps.importLibrary("maps");
+    const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
+
+    let content;
+
+    content = document.createElement("div");
+
+    content.classList.add("map-marker");
+    content.innerHTML = `
+        <div class="icon">
+        <i aria-hidden="true" class="fa fa-icon fa-signs-post" title="Test"></i>
+        <span class="fa-sr-only">Test</span>
+    </div>
+    <div class="details">
+        <div class="price">1</div>
+        <div class="address">1</div>
+        <div class="features">
+        <div>
+            <i aria-hidden="true" class="fa fa-bed fa-lg bed" title="bedroom"></i>
+            <span class="fa-sr-only">bedroom</span>
+            <span>1</span>
+        </div>
+        <div>
+            <i aria-hidden="true" class="fa fa-bath fa-lg bath" title="bathroom"></i>
+            <span class="fa-sr-only">bathroom</span>
+            <span>1</span>
+        </div>
+        <div>
+            <i aria-hidden="true" class="fa fa-ruler fa-lg size" title="size"></i>
+            <span class="fa-sr-only">size</span>
+            <span>1 ft<sup>2</sup></span>
+        </div>
+        </div>
+    </div>
+        
+        `;
+
+    return content;
+    // let marker = new AdvancedMarkerElement ({
+    //     position: pos,
+    //     map,
+    //     content: content,
+    // });
+
+    // return marker;
 }

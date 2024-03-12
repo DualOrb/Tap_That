@@ -44,10 +44,13 @@ body {
     }
 }
 
-/*Form Elements related to the pin box*/
 #work-area {
     padding: 20px;
     background-color: #E0E0E0;
 }
 
+/*Related to the main map*/
+.current-location {
+    padding: 10%;
+}
 
